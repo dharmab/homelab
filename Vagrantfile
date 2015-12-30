@@ -16,8 +16,6 @@ def get_ip_address(interface_id, subnet_id='10.10.10')
 end
 
 Vagrant.configure(2) do |config|
-
-
   config.vm.box = "dharmab/centos7"
 
   config.vm.provider 'virtualbox' do |virtualbox|
@@ -27,8 +25,7 @@ Vagrant.configure(2) do |config|
   end
   # Gateway
   config.vm.define "router" do |router|
-    ip = get_ip_address(1)
-    router.vm.network :private_network, ip: ip
+    router.vm.network :private_network, ip: get_ip_address(1)
   end
 
   # DNS Master
@@ -44,7 +41,6 @@ Vagrant.configure(2) do |config|
   # Configuration Management
   config.vm.define "ansible" do |ansible|
     ansible.vm.network :private_network, ip: get_ip_address(4)
-    ansible.vm.provision :shell, inline: "yum -y install ansible"
+    ansible.vm.provision :shell, path: "bootstrap.sh"
   end
-
 end
