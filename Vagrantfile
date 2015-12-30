@@ -2,28 +2,32 @@
 # vim: set ft=ruby softtabstop=2 shiftwidth=2 expandtab :
 
 ##
-# Compose a local IPv6 address
-# The prefix, local bit and global ID are defined in compliance with RFC 4193
-# The 16-bit +subnet_id+ and 64-bit +interface_id+ values are combined with the
-# prefix, local bit and global ID to create the IP address.
-# Returns the IPv6 address as a string.
-def get_ip_address(interface_id, subnet_id=0)
-  # Each hexadecimal digit encodes 4 bits
-  # 16-bit subnet ID = 4 characters
-  subnet_id_as_hex = subnet_id.to_s(16).rjust(4, "0")
-  # 64-bit interface ID = 16 characters
-  interface_id_as_hex = interface_id.to_s(16).rjust(16, "0")
+# Compose a local IPv4 address
+# +subnet_id+ is the first three octets of the address as a string, (e.g.
+# '192.168.10', and the +interface_id+ is the fourth octet as a string or
+# integer (e.g. 25 or '25')
+# Returns the IPv4 address as a string.
+def get_ip_address(interface_id, subnet_id='10.10.10')
+  if subnet_id[-1, 1] != '.'
+    subnet_id << '.'
+  end
 
-  # Use scan and join to insert a colon between each 4 characters
-  "fdfefdb48152#{subnet_id_as_hex}#{interface_id_as_hex}".scan(/.{4}/).join(":")
+  "#{subnet_id}#{interface_id}"
 end
 
 Vagrant.configure(2) do |config|
+
+
   config.vm.box = "dharmab/centos7"
 
+  config.vm.provider 'virtualbox' do |virtualbox|
+    # Save disk space by using linked clones
+    # The drawback is reduced disk I/O... but I have SSDs :D
+    virtualbox.linked_clone = true if Vagrant::VERSION =~ /^1.8/
+  end
   # Gateway
   config.vm.define "router" do |router|
-    ip = get_ip_address(10)
+    ip = get_ip_address(1)
     router.vm.network :private_network, ip: ip
   end
 
