@@ -19,7 +19,7 @@ set_ansible_config defaults host_key_checking False
 set_ansible_config defaults inventory /vagrant/inventory.ini
 set_ansible_config defaults remote_user vagrant
 
-# Install Vagrant insecure private key
+# Install Vagrant insecure keypair
 vagrant_insecure_public_key_url='https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant.pub'
 vagrant_insecure_private_key_url='https://raw.githubusercontent.com/mitchellh/vagrant/master/keys/vagrant'
 vagrant_ssh_directory=/home/vagrant/.ssh

@@ -18,6 +18,9 @@ end
 Vagrant.configure(2) do |config|
   config.vm.box = "dharmab/centos7"
 
+  # We use the default insecure keypair for Ansible authentication
+  config.ssh.insert_key = false
+
   config.vm.provider 'virtualbox' do |virtualbox|
     # Save disk space by using linked clones
     # The drawback is reduced disk I/O... but I have SSDs :D
