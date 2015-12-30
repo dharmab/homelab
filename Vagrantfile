@@ -28,22 +28,22 @@ Vagrant.configure(2) do |config|
   end
   # Gateway
   config.vm.define "router" do |router|
-    router.vm.network :private_network, ip: get_ip_address(1)
+    router.vm.network :private_network, ip: get_ip_address(2)
   end
 
   # DNS Master
   config.vm.define "dnsmaster" do |dns|
-    dns.vm.network :private_network, ip: get_ip_address(2)
+    dns.vm.network :private_network, ip: get_ip_address(3)
   end
 
   # DNS Slave
   config.vm.define "dnsslave" do |dns|
-    dns.vm.network :private_network, ip: get_ip_address(3)
+    dns.vm.network :private_network, ip: get_ip_address(4)
   end
 
   # Configuration Management
   config.vm.define "ansible" do |ansible|
-    ansible.vm.network :private_network, ip: get_ip_address(4)
+    ansible.vm.network :private_network, ip: get_ip_address(5)
     ansible.vm.provision :shell, path: "bootstrap.sh"
   end
 end
