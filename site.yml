@@ -2,3 +2,6 @@
 - hosts: all
   roles:
     - firewall
+- hosts: routers
+  roles:
+    - router

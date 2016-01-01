@@ -1,0 +1,4 @@
+---
+- name: configure internal subnet
+  firewalld: zone=internal source={{ router_internal_subnet }} state=enabled
+  become: yes
