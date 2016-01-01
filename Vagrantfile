@@ -7,9 +7,9 @@
 # '192.168.10', and the +interface_id+ is the fourth octet as a string or
 # integer (e.g. 25 or '25')
 # Returns the IPv4 address as a string.
-def get_ip_address(interface_id, subnet_id='10.10.10')
-  if subnet_id[-1, 1] != '.'
-    subnet_id << '.'
+def get_ip_address(interface_id, subnet_id="10.10.10")
+  if subnet_id[-1, 1] != "."
+    subnet_id << "."
   end
 
   "#{subnet_id}#{interface_id}"
@@ -21,7 +21,7 @@ Vagrant.configure(2) do |config|
   # We use the default insecure keypair for Ansible authentication
   config.ssh.insert_key = false
 
-  config.vm.provider 'virtualbox' do |virtualbox|
+  config.vm.provider "virtualbox" do |virtualbox|
     # Save disk space by using linked clones
     # The drawback is reduced disk I/O... but I have SSDs :D
     virtualbox.linked_clone = true if Vagrant::VERSION =~ /^1.8/
