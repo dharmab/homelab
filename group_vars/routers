@@ -1,0 +1,13 @@
+---
+router_internal_subnet: '10.10.10.0/24'
+dhcp_scopes:
+  - subnet: '10.10.10.0'
+    netmask: '255.255.255.0'
+    broadcast_address: '10.10.10.255'
+    router: '10.10.10.2'
+    nameservers:
+      - '8.8.8.8'
+      - '8.8.4.4'
+    low_address: '10.10.10.10'
+    high_address: '10.10.10.255'
+

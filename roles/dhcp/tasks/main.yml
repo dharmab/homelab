@@ -1,0 +1,13 @@
+---
+- name: install dhcp server
+  yum: name=dhcp
+  become: yes
+
+- name: configure dhcp server
+  template: src=dhcpd.conf dest=/etc/dhcp/dhcpd.conf owner=root group=root
+  become: yes
+  notify: restart dhcp server
+
+- name: start dhcp server
+  service: name=dhcpd state=running enabled=yes
+  become: yes
