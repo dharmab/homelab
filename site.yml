@@ -5,3 +5,6 @@
 - hosts: routers
   roles:
     - router
+- hosts: nameservers
+  roles:
+    - nameserver

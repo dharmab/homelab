@@ -27,17 +27,20 @@ Vagrant.configure(2) do |config|
     virtualbox.linked_clone = true if Vagrant::VERSION =~ /^1.8/
   end
   # Gateway
-  config.vm.define "router" do |router|
+  config.vm.define "router-1" do |router|
+    router.vm.hostname = "router-1"
     router.vm.network :private_network, ip: get_ip_address(2)
   end
 
   # DNS Master
-  config.vm.define "dnsmaster" do |dns|
+  config.vm.define "bind-1" do |dns|
+    dns.vm.hostname = "bind-1"
     dns.vm.network :private_network, ip: get_ip_address(3)
   end
 
   # DNS Slave
-  config.vm.define "dnsslave" do |dns|
+  config.vm.define "bind-2" do |dns|
+    dns.vm.hostname = "bind-2"
     dns.vm.network :private_network, ip: get_ip_address(4)
   end
 

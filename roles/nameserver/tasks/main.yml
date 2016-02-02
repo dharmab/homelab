@@ -1,0 +1,23 @@
+---
+- name: install nameserver
+  yum: name=bind
+  become: yes
+
+- name: configure nameserver
+  template: src=named.conf dest=/etc/named.conf owner=named group=named validate='named-checkconf %s'
+  become: yes
+  notify:
+    - restart nameserver
+
+- name: configure zones
+  template: src=master.zone dest=/var/named/{{ item.key }}.zone owner=named group=named 
+  #validate='named-checkzone {{ item.key }}%s'
+  become: yes
+  with_dict: "{{ nameserver_zones }}"
+  when: item.value.type == "master"
+  notify:
+    - restart nameserver
+
+- name: start nameserver
+  service: name=named state=running enabled=yes
+  become: yes

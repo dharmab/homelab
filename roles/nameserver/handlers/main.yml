@@ -1,0 +1,4 @@
+---
+- name: restart nameserver
+  service: name=named state=restarted
+  become: yes

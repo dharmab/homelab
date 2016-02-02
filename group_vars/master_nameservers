@@ -1,0 +1,36 @@
+nameserver_forwarders:
+  - 8.8.8.8
+  - 8.8.4.4
+nameserver_zones:
+  'lab.dharmab.com':
+    type: master
+    nameserver: ns1.lab.dharmab.com
+    email: dharma.bellamkonda@gmail.com
+    allowed_slaves:
+      - 10.10.10.4
+    records:
+    - type: NS
+      resource: ns1.lab.dharmab.com
+    - type: NS
+      resource: ns2.lab.dharmab.com
+    - type: A
+      name: router-1.lab.dharmab.com
+      resource: 10.10.10.2
+    - type: CNAME
+      name: gateway.lab.dharmab.com
+      resource: router-1.lab.dharmab.com
+    - type: CNAME
+      name: dhcp.lab.dharmab.com
+      resource: router-1.lab.dharmab.com
+    - type: A
+      name: bind-1.lab.dharmab.com
+      resource: 10.10.10.3
+    - type: A
+      name: ns1.lab.dharmab.com
+      resource: 10.10.10.3
+    - type: A
+      name: bind-2.lab.dharmab.com
+      resource: 10.10.10.4
+    - type: A
+      name: ns2.lab.dharmab.com
+      resource: 10.10.10.4
