@@ -1,0 +1,2 @@
+nameserver_allowed_clients:
+  - 10.10.10.0/24

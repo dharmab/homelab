@@ -1,13 +1,13 @@
 nameserver_forwarders:
   - 8.8.8.8
   - 8.8.4.4
+nameserver_allowed_slaves:
+  - 10.10.10.4
 nameserver_zones:
   'lab.dharmab.com':
     type: master
     nameserver: ns1.lab.dharmab.com
     email: dharma.bellamkonda@gmail.com
-    allowed_slaves:
-      - 10.10.10.4
     records:
     - type: NS
       resource: ns1.lab.dharmab.com
