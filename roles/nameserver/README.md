@@ -27,3 +27,9 @@ Configures a CentOS 7 server as a DNS nameserver.
   - If `type` is `CNAME`, the name of the CNAME or A record the CNAME should point to. Examples: `203.0.113.13`, `support.example.com`
   - If `type` is `NS`, the name of the nameserver the NS record should point to. Example: `ns1.example.com`
   - If `type` is `MX` the priority and name of the mail server separated by whitespace. Example: `30 mail1.example.com`
+
+## Known Issues
+
+This role will *always* restart servers which are serving one or more master zones. This is because the serial in each master zonefile will update to the current timestamp, which will trigger a service restart. This shouldn't be a problem if your nameservers are redundant.
+
+Your nameservers *are* redundant, right?
