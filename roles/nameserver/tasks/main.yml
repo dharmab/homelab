@@ -10,8 +10,7 @@
     - restart nameserver
 
 - name: configure zones
-  template: src=master.zone dest=/var/named/{{ item.key }}.zone owner=named group=named 
-  #validate='named-checkzone {{ item.key }}%s'
+  template: src=master.zone dest=/var/named/{{ item.key }}.zone owner=named group=named validate='named-checkzone {{ item.key }} %s'
   become: yes
   with_dict: "{{ nameserver_zones }}"
   when: item.value.type == "master"
