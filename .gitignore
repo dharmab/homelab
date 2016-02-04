@@ -1,5 +1,7 @@
+*.iml
 *.swo
 *.swp
+.idea
 .vagrant
 env.sh
 site.retry

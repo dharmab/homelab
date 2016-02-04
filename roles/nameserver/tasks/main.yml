@@ -1,7 +1,15 @@
 ---
 - name: install nameserver
-  yum: name=bind
+  yum: 
+    name: bind
   become: yes
+
+- name: install dependencies for automatic reverse records
+  yum: 
+    name: "{{ item }}"
+  with_items:
+    - python-dns
+    - python-netaddr
 
 - name: configure nameserver
   template:

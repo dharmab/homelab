@@ -1,4 +1,9 @@
 ---
+- name: generate reverse zones
+  script: reverse.py {% for zone, config in nameserver_zones if config.type == 'master' %}/var/named/{{ zone }}.zone {% endfor %}
+  become: yes
+  become_user: named
+
 - name: restart nameserver
   systemd:
     name: named
