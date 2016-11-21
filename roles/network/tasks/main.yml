@@ -1,0 +1,14 @@
+---
+- name: set default gateway
+  lineinfile: dest=/etc/sysconfig/network regexp="^GATEWAY=.*" line="GATEWAY={{ network_gateway }}"
+  when: network_gateway is not none
+  become: yes
+  notify:
+    - restart network
+
+- name: unset default gateway
+  lineinfile: dest=/etc/sysconfig/network regexp="^GATEWAY=.*" line="#GATEWAY="
+  when: network_gateway is none
+  become: yes
+  notify:
+    - restart network

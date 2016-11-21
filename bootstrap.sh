@@ -10,37 +10,10 @@ set_ansible_config() {
 }
 
 install_ansible() {
-    ansible_repository_url="https://github.com/ansible/ansible.git"
-    ansible_directory="/home/vagrant/ansible"
-
-    # Installing the release version Ansible is the easiest way to get all of
-    # the dependencies. Also, we use the release version of Ansible to bootstrap
-    # our configuration.
     yum -y install ansible git
     set_ansible_config defaults host_key_checking False
     set_ansible_config defaults inventory /vagrant/inventory.ini
     set_ansible_config defaults remote_user vagrant
-
-    # Clone the repository
-    if [ ! -d $ansible_directory ]; then
-        pushd /home/vagrant
-        sudo -u vagrant -H git clone $ansible_repository_url
-        popd
-    fi
-
-    # Update to the latest development version
-    pushd $ansible_directory
-    sudo -u vagrant -H git pull
-    sudo -u vagrant -H git submodule update --init --recursive
-    #shellcheck disable=SC1091
-    popd
-
-    # Source the development Ansible environment on login
-    env_oneliner="source $ansible_directory/hacking/env-setup"
-    profile=/home/vagrant/.bash_profile
-    if ! grep "$env_oneliner" $profile; then
-        echo "$env_oneliner" >> $profile
-    fi
 }
 
 
