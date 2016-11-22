@@ -19,9 +19,6 @@ nameserver_zones:
     - type: CNAME
       name: gateway
       resource: router-1
-    - type: CNAME
-      name: dhcp
-      resource: router-1
     - type: A
       name: bind-1
       resource: 10.10.10.3
