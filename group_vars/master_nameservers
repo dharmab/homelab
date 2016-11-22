@@ -10,27 +10,27 @@ nameserver_zones:
     email: dharma.bellamkonda@gmail.com
     records:
     - type: NS
-      resource: ns1.lab.dharmab.com
+      resource: ns1.lab.dharmab.com.
     - type: NS
-      resource: ns2.lab.dharmab.com
+      resource: ns2.lab.dharmab.com.
     - type: A
-      name: router-1.lab.dharmab.com
+      name: router-1
       resource: 10.10.10.2
     - type: CNAME
-      name: gateway.lab.dharmab.com
-      resource: router-1.lab.dharmab.com
+      name: gateway
+      resource: router-1
     - type: CNAME
-      name: dhcp.lab.dharmab.com
-      resource: router-1.lab.dharmab.com
+      name: dhcp
+      resource: router-1
     - type: A
-      name: bind-1.lab.dharmab.com
+      name: bind-1
       resource: 10.10.10.3
     - type: A
-      name: ns1.lab.dharmab.com
+      name: ns1.lab.dharmab.com.
       resource: 10.10.10.3
     - type: A
-      name: bind-2.lab.dharmab.com
+      name: bind-2
       resource: 10.10.10.4
     - type: A
-      name: ns2.lab.dharmab.com
+      name: ns2.lab.dharmab.com.
       resource: 10.10.10.4

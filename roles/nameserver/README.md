@@ -24,7 +24,7 @@ Configures a CentOS 7 server as a DNS nameserver.
 - `name`: If `type` is `A` or `CNAME`, the record name. If the name is fully qualified, then this record is fully qualified. If the name is not fully qualified, the name of the zone will be appended to this name. Examples: `www`, `www.example.com.` The default is undefined.
 - `resource`: The resource that the record names. The default is undefined.
   - If `type` is `A`, the IP address the A record should point to. Example: `203.0.113.54`
-  - If `type` is `CNAME`, the name of the CNAME or A record the CNAME should point to. Examples: `203.0.113.13`, `support.example.com`
+  - If `type` is `CNAME`, the name of the CNAME or A record the CNAME should point to. Examples: `203.0.113.13`, `support.example.com.`
   - If `type` is `NS`, the name of the nameserver the NS record should point to. Example: `ns1.example.com`
   - If `type` is `MX` the priority and name of the mail server separated by whitespace. Example: `30 mail1.example.com`
 

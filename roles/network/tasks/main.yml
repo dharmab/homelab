@@ -7,8 +7,12 @@
     - restart network
 
 - name: unset default gateway
-  lineinfile: dest=/etc/sysconfig/network regexp="^GATEWAY=.*" line="#GATEWAY="
+  replace: dest=/etc/sysconfig/network regexp="^GATEWAY=.*" replace=""
   when: network_gateway is none
   become: yes
   notify:
     - restart network
+
+- name: configure nameservers and domain
+  template: src=resolv.conf dest=/etc/resolv.conf
+  become: yes

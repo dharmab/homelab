@@ -3,13 +3,13 @@
   firewalld: zone=internal source={{ router_internal_subnet }} state=enabled permanent=yes
   become: yes
   notify:
-    - restart firewall
+    - reload firewall
 
 - name: configure public zone
   firewalld: zone=public masquerade=yes state=enabled permanent=yes
   become: yes
   notify:
-    - restart firewall
+    - reload firewall
 
 - name: enable packet forwarding
   sysctl: name={{ item }} value=1 state=present reload=yes
