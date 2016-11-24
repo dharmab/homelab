@@ -1,0 +1,17 @@
+---
+- name: install utilities
+  yum: name={{ item }}
+  with_items:
+    - aria2 # Download tool that supports BitTorrent
+    - bind-utils # DNS troubleshooting tools
+    - htop # Simple CPU/Memory monitor
+    - iotop # Simple Disk Monitor
+    - nmap # Network troubleshooting/pentesting tool
+    - tcpdump # Network packet capture tool
+    - tmux # Terminal multiplexer
+    - unzip # Extract ZIP archives
+    - vim-enhanced # Text editor that doesn't suck
+    - wget # Simple HTTP download tool
+    - zip # Create ZIP archives
+    - strace # Userspace/kernel interaction troubleshooting tool
+  become: yes

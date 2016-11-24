@@ -1,11 +1,12 @@
 ---
-- hosts: all
-  roles:
-    - network
-    - firewall
 - hosts: routers
   roles:
     - router
 - hosts: nameservers
   roles:
     - nameserver
+- hosts: all
+  roles:
+    - network
+    - firewall
+    - utilities
