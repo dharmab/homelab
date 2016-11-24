@@ -1,4 +1,4 @@
 ---
 - name: reload firewall
-  command: name='firewall-cmd --reload'
+  command: firewall-cmd --reload
   become: yes
