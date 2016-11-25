@@ -26,6 +26,7 @@ Vagrant.configure(2) do |config|
     # The drawback is reduced disk I/O... but I have SSDs :D
     virtualbox.linked_clone = true if Vagrant::VERSION =~ /^1.8/
   end
+
   # Gateway
   config.vm.define "router-1" do |router|
     router.vm.hostname = "router-1"
@@ -44,9 +45,19 @@ Vagrant.configure(2) do |config|
     dns.vm.network :private_network, ip: get_ip_address(4)
   end
 
+  # NTP servers
+  config.vm.define "ntp-1" do |dns|
+    dns.vm.hostname = "ntp-1"
+    dns.vm.network :private_network, ip: get_ip_address(5)
+  end
+  config.vm.define "ntp-2" do |dns|
+    dns.vm.hostname = "ntp-2"
+    dns.vm.network :private_network, ip: get_ip_address(6)
+  end
+
   # Configuration Management
   config.vm.define "ansible" do |ansible|
-    ansible.vm.network :private_network, ip: get_ip_address(5)
+    ansible.vm.network :private_network, ip: get_ip_address(10)
     ansible.vm.provision :shell, path: "bootstrap.sh"
   end
 end

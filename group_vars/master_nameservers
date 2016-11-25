@@ -31,3 +31,12 @@ nameserver_zones:
     - type: A
       name: ns2.lab.dharmab.com.
       resource: 10.10.10.4
+    - type: A
+      name: ntp-1
+      resource: 10.10.10.5
+    - type: A
+      name: ntp-2
+      resource: 10.10.10.6
+    - type: A
+      name: ansible
+      resource: 10.10.10.10

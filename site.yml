@@ -10,4 +10,5 @@
     - network
     - firewall
     - openssh
+    - ntp
     - utilities

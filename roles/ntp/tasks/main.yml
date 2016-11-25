@@ -1,0 +1,28 @@
+---
+- name: install ntpd
+  yum: name=ntp
+  become: yes
+
+- name: configure ntp service
+  template: src=ntp.conf dest=/etc/ntp.conf
+  notify:
+    - restart ntp
+  become: yes
+
+- name: open ntp firewall port
+  firewalld: port=123/udp state=enabled permanent=true
+  when: ntp_is_server
+  notify:
+    - reload firewall
+  become: yes
+
+- name: close ntp firewall port
+  firewalld: port=123/udp state=disabled permanent=true
+  when: not ntp_is_server
+  notify:
+    - reload firewall
+  become: yes
+
+- name: start ntp service
+  service: name=ntpd state=started enabled=yes
+  become: yes

@@ -2,3 +2,6 @@ network_gateway: 10.10.10.2
 network_primary_nameserver: 10.10.10.3
 network_secondary_nameserver: 10.10.10.4
 network_domain: lab.dharmab.com
+ntp_servers:
+  - ntp-1.lab.dharmab.com
+  - ntp-2.lab.dharmab.com
