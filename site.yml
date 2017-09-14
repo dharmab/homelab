@@ -12,3 +12,6 @@
     - openssh
     - ntp
     - utilities
+- hosts: prometheus
+  roles:
+    - prometheus

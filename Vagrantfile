@@ -54,10 +54,18 @@ Vagrant.configure(2) do |config|
     dns.vm.hostname = "ntp-2"
     dns.vm.network :private_network, ip: get_ip_address(6)
   end
-
+  
   # Configuration Management
   config.vm.define "ansible" do |ansible|
     ansible.vm.network :private_network, ip: get_ip_address(10)
     ansible.vm.provision :shell, path: "bootstrap.sh"
   end
+  
+  # Prometheus
+  config.vm.define "prometheus-1" do |prometheus|
+    prometheus.vm.hostname = "prometheus-1"
+    prometheus.vm.network :private_network, ip: get_ip_address(12)
+    prometheus.vm.network :forwarded_port, guest: 9090, host: 9090
+  end
+
 end

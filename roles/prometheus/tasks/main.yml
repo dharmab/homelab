@@ -1,0 +1,26 @@
+---
+- name: configure prometheus systemd unit
+  copy:
+    src: prometheus.service
+    dest: /etc/systemd/system/prometheus.service
+    owner: root
+    group: root
+    mode: 644
+  become: yes
+  notify: restart prometheus
+
+- name: open prometheus ports in firewall
+  firewalld: port={{ item }} state=enabled permanent=true
+  with_items:
+    - 9090/tcp # Prometheus
+    - 9092/tcp # Pushgateway
+    - 9093/tcp # Alertmanager
+  become: yes
+  notify:
+    - reload firewall
+
+- name: start prometheus
+  systemd:
+    name: prometheus
+    state: started
+  become: yes

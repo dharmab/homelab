@@ -40,3 +40,9 @@ nameserver_zones:
     - type: A
       name: ansible
       resource: 10.10.10.10
+    - type: A
+      name: prometheus-1.lab.dharmab.com.
+      resource: 10.10.10.12
+    - type: CNAME
+      name: prometheus
+      resource: prometheus-1
