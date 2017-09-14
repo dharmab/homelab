@@ -1,8 +1,14 @@
 ---
 - name: restart nginx
-  service: name=nginx state=restarted
+  systemd:
+    name: nginx
+    state: restarted
+    daemon_reload: yes
   become: yes
 
 - name: reload nginx
-  service: name=nginx state=reloaded
+  systemd:
+    name: nginx
+    state: reloaded
+    daemon_reload: yes
   become: yes

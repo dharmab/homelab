@@ -1,18 +1,30 @@
 ---
 - name: configure internal zone
-  firewalld: zone=internal source={{ router_internal_subnet }} state=enabled permanent=yes
+  firewalld:
+    zone: internal
+    source: "{{ router_internal_subnet }}"
+    state: enabled
+    permanent: yes
   become: yes
   notify:
     - reload firewall
 
 - name: configure public zone
-  firewalld: zone=public masquerade=yes state=enabled permanent=yes
+  firewalld:
+    zone: public
+    masquerade: yes
+    state: enabled
+    permanent: yes
   become: yes
   notify:
     - reload firewall
 
 - name: enable packet forwarding
-  sysctl: name={{ item }} value=1 state=present reload=yes
+  sysctl:
+    name: "{{ item }} "
+    value: 1
+    state: present
+    reload: yes
   with_items:
     - net.ipv4.ip_forward
     - net.ipv6.conf.default.forwarding

@@ -4,13 +4,23 @@
   become: yes
 
 - name: configure nameserver
-  template: src=named.conf dest=/etc/named.conf owner=named group=named validate='named-checkconf %s'
+  template:
+    src: named.conf
+    dest: /etc/named.conf
+    owner: named
+    group: named
+    validate: 'named-checkconf %s'
   become: yes
   notify:
     - restart nameserver
 
 - name: configure zones
-  template: src=master.zone dest=/var/named/{{ item.key }}.zone owner=named group=named validate='named-checkzone {{ item.key }} %s'
+  template:
+    src: master.zone
+    dest: /var/named/{{ item.key }}.zone
+    owner: named
+    group: named
+    validate: 'named-checkzone {{ item.key }} %s'
   become: yes
   with_dict: "{{ nameserver_zones }}"
   when: item.value.type == "master"
@@ -18,7 +28,10 @@
     - restart nameserver
 
 - name: open DNS in firewall
-  firewalld: port={{ item }} state=enabled permanent=true
+  firewalld:
+    port: "{{ item }}"
+    state: enabled
+    permanent: true
   with_items:
     - 53/tcp
     - 53/udp
@@ -27,5 +40,8 @@
     - reload firewall
 
 - name: start nameserver
-  service: name=named state=started enabled=yes
+  systemd:
+    name: named
+    state: started
+    enabled: yes
   become: yes

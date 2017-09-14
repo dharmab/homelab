@@ -1,6 +1,7 @@
 ---
 - name: install utilities
-  yum: name={{ item }}
+  yum:
+    name: "{{ item }}"
   with_items:
     - aria2 # Download tool that supports BitTorrent
     - bind-utils # DNS troubleshooting tools

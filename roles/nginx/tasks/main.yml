@@ -4,11 +4,15 @@
   become: yes
 
 - name: install entropy generation daemon
-  package: name=haveged
+  package:
+    name: haveged
   become: yes
 
 - name: start entropy generation daemon
-  service: name=haveged state=running enabled=yes
+  systemd:
+    name: haveged
+    state: started
+    enabled: yes
   become: yes
 
 - name: generate diffie-hellman ephemeral parameter
@@ -18,16 +22,28 @@
   become: yes
 
 - name: configure nginx
-  template: src=nginx.conf dest=/etc/nginx/nginx.conf owner=root group=root mode=644 validate='nginx -t -c %s'
+  template:
+    src: nginx.conf
+    dest: /etc/nginx/nginx.conf
+    owner: root
+    group: root
+    mode: 644
+    validate: 'nginx -t -c %s'
   become: yes
   notify: reload nginx
 
 - name: start nginx
-  service: name=nginx state=running enabled=yes
+  systemd:
+    name: nginx
+    state: running
+    enabled: yes
   become: yes
 
 - name: open http/s in firewall
-  firewalld: port={{ item }} state=enabled permanent=true
+  firewalld:
+    port: {{ item }}
+    state: enabled
+    permanent: true
   with_items:
     - 80/tcp
     - 443/tcp

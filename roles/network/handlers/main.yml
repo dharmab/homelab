@@ -1,4 +1,6 @@
 ---
 - name: restart network
-  service: name=network state=restarted
+  systemd:
+    name: network
+    state: restarted
   become: yes
