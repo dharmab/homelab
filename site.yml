@@ -11,6 +11,7 @@
     - firewall
     - openssh
     - ntp
+    - system
     - utilities
 - hosts: prometheus
   roles:

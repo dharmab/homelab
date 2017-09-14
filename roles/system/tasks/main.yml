@@ -1,0 +1,25 @@
+---
+- name: configure node exporter systemd unit
+  copy:
+    src: node-exporter.service
+    dest: /etc/systemd/system/node-exporter.service
+    owner: root
+    group: root
+    mode: 644
+  become: yes
+  notify: restart node exporter
+
+- name: open node exporter port in firewall
+  firewalld:
+    port: 9100/tcp
+    state: enabled
+    permanent: true
+  become: yes
+  notify:
+    - reload firewall
+
+- name: start node exporter
+  systemd:
+    name: node-exporter
+    state: started
+  become: yes
