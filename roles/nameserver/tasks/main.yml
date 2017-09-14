@@ -27,5 +27,5 @@
     - reload firewall
 
 - name: start nameserver
-  service: name=named state=running enabled=yes
+  service: name=named state=started enabled=yes
   become: yes
