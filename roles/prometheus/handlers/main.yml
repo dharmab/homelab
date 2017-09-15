@@ -7,8 +7,6 @@
   become: yes
 
 - name: reload prometheus
-  service: 
-    name: prometheus 
-    state: reloaded
-    daemon_reload: yes
-  become: yes
+  uri: 
+    url: "http://localhost:9090/-/reload"
+    method: POST

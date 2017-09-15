@@ -1,0 +1,1 @@
+{{ prometheus_configuration | to_nice_yaml }}

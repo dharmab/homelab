@@ -15,11 +15,10 @@
     state: enabled
     permanent: true
   become: yes
-  notify:
-    - reload firewall
 
 - name: start node exporter
   systemd:
     name: node-exporter
     state: started
+    enabled: yes
   become: yes

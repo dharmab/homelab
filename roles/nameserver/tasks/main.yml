@@ -36,8 +36,6 @@
     - 53/tcp
     - 53/udp
   become: yes
-  notify:
-    - reload firewall
 
 - name: start nameserver
   systemd:

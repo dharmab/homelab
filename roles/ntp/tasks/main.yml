@@ -18,8 +18,6 @@
     state: enabled
     permanent: true
   when: ntp_is_server
-  notify:
-    - reload firewall
   become: yes
 
 - name: close ntp firewall port
@@ -28,8 +26,6 @@
     state: disabled
     permanent: true
   when: not ntp_is_server
-  notify:
-    - reload firewall
   become: yes
 
 - name: start ntp service

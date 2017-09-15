@@ -6,8 +6,6 @@
     state: enabled
     permanent: yes
   become: yes
-  notify:
-    - reload firewall
 
 - name: configure public zone
   firewalld:
@@ -16,8 +14,6 @@
     state: enabled
     permanent: yes
   become: yes
-  notify:
-    - reload firewall
 
 - name: enable packet forwarding
   sysctl:

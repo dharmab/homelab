@@ -16,33 +16,75 @@ nameserver_zones:
     - type: A
       name: router-1
       resource: 10.10.10.2
+    - type: SRV
+      name: _node-exporter._tcp
+      resource: 1 1 9100 router-1
+    - type: SRV
+      name: _cadvisor._tcp
+      resource: 1 1 8080 router-1
     - type: CNAME
       name: gateway
       resource: router-1
     - type: A
       name: bind-1
       resource: 10.10.10.3
+    - type: SRV
+      name: _node-exporter._tcp
+      resource: 1 1 9100 bind-1
+    - type: SRV
+      name: _cadvisor._tcp
+      resource: 1 1 8080 bind-1
     - type: A
-      name: ns1.lab.dharmab.com.
+      name: ns1
       resource: 10.10.10.3
     - type: A
       name: bind-2
       resource: 10.10.10.4
+    - type: SRV
+      name: _node-exporter._tcp
+      resource: 1 1 9100 bind-2
+    - type: SRV
+      name: _cadvisor._tcp
+      resource: 1 1 8080 bind-2
     - type: A
-      name: ns2.lab.dharmab.com.
+      name: ns2
       resource: 10.10.10.4
     - type: A
       name: ntp-1
       resource: 10.10.10.5
+    - type: SRV
+      name: _node-exporter._tcp
+      resource: 1 1 9100 ntp-1
+    - type: SRV
+      name: _cadvisor._tcp
+      resource: 1 1 8080 ntp-1
     - type: A
       name: ntp-2
       resource: 10.10.10.6
+    - type: SRV
+      name: _node-exporter._tcp
+      resource: 1 1 9100 ntp-2
+    - type: SRV
+      name: _cadvisor._tcp
+      resource: 1 1 8080 ntp-2
     - type: A
       name: ansible
       resource: 10.10.10.10
+    - type: SRV
+      name: _node-exporter._tcp
+      resource: 1 1 9100 ansible
+    - type: SRV
+      name: _cadvisor._tcp
+      resource: 1 1 8080 ansible
     - type: A
-      name: prometheus-1.lab.dharmab.com.
+      name: prometheus-1
       resource: 10.10.10.12
+    - type: SRV
+      name: _node-exporter._tcp
+      resource: 1 1 9100 prometheus-1
+    - type: SRV
+      name: _cadvisor._tcp
+      resource: 1 1 8080 prometheus-1
     - type: CNAME
       name: prometheus
       resource: prometheus-1

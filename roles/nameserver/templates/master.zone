@@ -13,7 +13,7 @@ $TTL {{ zone.ttl|default(3600) }}
 {% for record in zone.records %}
 {% if record.type in ['NS', 'MX'] -%}
 {{ origin }}. IN {{ record.type }} {{ record.resource }}
-{%- elif record.type in ['A', 'CNAME'] -%}
+{%- elif record.type in ['A', 'CNAME', 'SRV'] -%}
 {{ record.name }} IN {{ record.type }} {{ record.resource }}
 {%- endif %}
 

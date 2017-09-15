@@ -27,11 +27,10 @@
     state: enabled
     permanent: true
   become: yes
-  notify:
-    - reload firewall
 
 - name: start cadvisor
   systemd:
     name: cadvisor
     state: started
+    enabled: yes
   become: yes

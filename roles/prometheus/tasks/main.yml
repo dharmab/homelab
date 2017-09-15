@@ -9,6 +9,26 @@
   become: yes
   notify: restart prometheus
 
+- name: create prometheus configuration directory
+  file:
+    path: /etc/prometheus
+    state: directory
+    owner: root
+    group: root
+    mode: 755
+  become: yes
+
+- name: configure prometheus
+  template:
+    src: prometheus.yml
+    dest: /etc/prometheus/prometheus.yml
+    owner: root
+    group: root
+    mode: 644
+  become: yes
+  notify: 
+    - reload prometheus
+
 - name: open prometheus ports in firewall
   firewalld: port={{ item }} state=enabled permanent=true
   with_items:
@@ -16,11 +36,10 @@
     - 9092/tcp # Pushgateway
     - 9093/tcp # Alertmanager
   become: yes
-  notify:
-    - reload firewall
 
 - name: start prometheus
   systemd:
     name: prometheus
     state: started
+    enabled: yes
   become: yes

@@ -48,5 +48,3 @@
     - 80/tcp
     - 443/tcp
   become: yes
-  notify:
-    - reload firewall
