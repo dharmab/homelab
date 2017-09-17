@@ -3,6 +3,9 @@
 ```
 vagrant up
 vagrant ssh ansible
-cd /vagrant
-ansible-playbook site.yml
+ansible-playbook /vagrant/site.yml
 ```
+
+- Prometheus: http://localhost:9090
+- Grafana: http://localhost:3000
+

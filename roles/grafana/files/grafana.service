@@ -1,0 +1,18 @@
+[Unit]
+Description=Grafana
+After=docker.service
+Requires=docker.service
+ 
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker stop grafana
+ExecStartPre=-/usr/bin/docker rm grafana
+ExecStart=/usr/bin/docker run --rm \
+--name grafana \
+-v /var/lib/grafana:/var/lib/grafana \
+-p 3000:3000 \
+grafana/grafana:4.5.1 \
+-config.file /etc/grafana/grafana.ini
+ 
+[Install]
+WantedBy=multi-user.target

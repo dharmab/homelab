@@ -1,0 +1,41 @@
+---
+- name: configure grafana systemd unit
+  copy:
+    src: grafana.service
+    dest: /etc/systemd/system/grafana.service
+    owner: root
+    group: root
+    mode: 644
+  become: yes
+  notify: restart grafana
+
+- name: create grafana database directory
+  file:
+    path: /var/lib/grafana
+    state: directory
+    owner: root
+    group: root
+    mode: 755
+  become: yes
+
+- name: configure grafana
+  template:
+    src: grafana.conf
+    dest: /etc/systemd/system/grafana.service.d/grafana.conf
+    owner: root
+    group: root
+    mode: 600
+  become: yes
+  notify: 
+    - restart grafana
+
+- name: open grafana ports in firewall
+  firewalld: port=3000/tcp state=enabled permanent=true
+  become: yes
+
+- name: start grafana
+  systemd:
+    name: grafana
+    state: started
+    enabled: yes
+  become: yes

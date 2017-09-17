@@ -88,3 +88,12 @@ nameserver_zones:
     - type: CNAME
       name: prometheus
       resource: prometheus-1
+    - type: A
+      name: grafana-1
+      resource: 10.10.10.13
+    - type: SRV
+      name: _node-exporter._tcp
+      resource: 1 1 9100 grafana-1
+    - type: SRV
+      name: _cadvisor._tcp
+      resource: 1 1 8080 grafana-1

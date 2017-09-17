@@ -1,0 +1,9 @@
+grafana_environment:
+  # Anonymous auth for local development
+  GF_AUTH_ANONYMOUS_ENABLED: "true"
+  GF_AUTH_ANONYMOUS_ORG_ROLE: "Admin"
+grafana_datasources:
+  - name: Prometheus
+    type: prometheus
+    access: proxy
+    url: "http://prometheus.lab.dharmab.com:9090"

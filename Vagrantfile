@@ -67,5 +67,11 @@ Vagrant.configure(2) do |config|
     prometheus.vm.network :private_network, ip: get_ip_address(12)
     prometheus.vm.network :forwarded_port, guest: 9090, host: 9090
   end
+  
+  config.vm.define "grafana-1" do |grafana|
+    grafana.vm.hostname = "grafana-1"
+    grafana.vm.network :private_network, ip: get_ip_address(13)
+    grafana.vm.network :forwarded_port, guest: 3000, host: 3000
+  end
 
 end
