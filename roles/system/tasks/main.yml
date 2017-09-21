@@ -13,7 +13,8 @@
   firewalld:
     port: 9100/tcp
     state: enabled
-    permanent: true
+    permanent: yes
+    immediate: yes
   become: yes
 
 - name: start node exporter

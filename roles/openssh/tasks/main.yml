@@ -25,6 +25,6 @@
   systemd:
     name: sshd
     state: started
-    enabled: true
+    enabled: yes
   become: yes
 

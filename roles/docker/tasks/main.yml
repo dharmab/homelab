@@ -25,7 +25,8 @@
   firewalld:
     port: 8080/tcp
     state: enabled
-    permanent: true
+    permanent: yes
+    immediate: yes
   become: yes
 
 - name: start cadvisor

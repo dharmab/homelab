@@ -43,7 +43,8 @@
   firewalld:
     port: {{ item }}
     state: enabled
-    permanent: true
+    permanent: yes
+    immediate: yes
   with_items:
     - 80/tcp
     - 443/tcp

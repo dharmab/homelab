@@ -16,7 +16,8 @@
   firewalld:
     port: 123/udp
     state: enabled
-    permanent: true
+    permanent: yes
+    immediate: yes
   when: ntp_is_server
   become: yes
 
@@ -24,7 +25,8 @@
   firewalld:
     port: 123/udp
     state: disabled
-    permanent: true
+    permanent: yes
+    immediate: yes
   when: not ntp_is_server
   become: yes
 

@@ -30,7 +30,11 @@
     - reload prometheus
 
 - name: open prometheus ports in firewall
-  firewalld: port={{ item }} state=enabled permanent=true
+  firewalld: 
+    port: "{{ item }}"
+    state: enabled 
+    permanent: yes
+    immediate: yes
   with_items:
     - 9090/tcp # Prometheus
     - 9092/tcp # Pushgateway

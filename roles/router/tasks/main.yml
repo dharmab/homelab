@@ -5,6 +5,7 @@
     source: "{{ router_internal_subnet }}"
     state: enabled
     permanent: yes
+    immediate: yes
   become: yes
 
 - name: configure public zone
