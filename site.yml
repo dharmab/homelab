@@ -16,3 +16,6 @@
 - hosts: prometheus
   roles:
     - prometheus
+- hosts: graylog
+  roles:
+    - graylog
