@@ -10,6 +10,7 @@ Installs the Nginx web server and configures Nginx virtual hosts.
   - `proxy_scheme`: If `type` is `proxy`, the scheme to use with the servers defined in `proxy_addresses`. If `type` is not `proxy`, this has no effect. Options are `http` and `https`. The default is `http`.
   - `proxy_addresses`: If `type` is `proxy`, the list of upstream addresses and ports which the reverse proxy will forward requests to. If `type` is not `proxy`, this has no effect. The default is `['localhost:8080']`
   - `enable_https`: If `True`, HTTPS will be enabled and enforced with redirection and HSTS headers. Otherwise, HTTPS will not be enabled. The default is `False`, but it is *strongly* recommended to enable HTTPS if possible.
+  - `is_default`: If `True`, this virtual host will be the default server. Only one virtual host may have this set to `True`. The default is `False`
 
 ```yaml
 nginx_virtual_hosts:
@@ -17,6 +18,7 @@ nginx_virtual_hosts:
     proxy_scheme: http
     proxy_addresses:
       - localhost:8080
+    is_default: True
     enable_https: True
     key_file: /etc/ssl/foo.key
     certificate_file: /etc/ssl/foo.crt

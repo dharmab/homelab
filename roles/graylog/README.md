@@ -4,6 +4,6 @@ Installs Graylog using the [minimum setup single-node architecture](http://docs.
 
 ## Variables
 
-<!-- List of variables, their purpose and default values. Use all_lowercase_with_underscores for variable names and prefix variable names with the role name to avoid conflicting names. -->
-- `example_variable`: Example variable for documentation purposes. The default is `True`
-
+- `graylog_root_password`: Password for the `admin` account. Required.
+- `graylog_password_secret_seed`: Secret used to generate the password secret, which is used to protect the root password on disk. May be any arbitrary string. Required.
+- `graylog_open_port`: If `True`, direct external access to the Graylog web UI/API port is enabled. Otherwise, external access is disabled and a reverse proxy is required to access Graylog. The default is `False`.

@@ -1,2 +1,2 @@
 ---
-example_variable: True
+graylog_open_port: False

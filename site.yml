@@ -6,6 +6,11 @@
   roles:
     - nameserver
 - hosts: all
+  tasks:
+    # Can't reach most hosts on first run until DNS is operational, so we have
+    # to check the hosts again once the nameservers are up
+    - meta: clear_host_errors
+- hosts: all
   roles:
     - network
     - firewall
@@ -19,3 +24,4 @@
 - hosts: graylog
   roles:
     - graylog
+    - nginx

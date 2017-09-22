@@ -35,13 +35,13 @@
 - name: start nginx
   systemd:
     name: nginx
-    state: running
+    state: started
     enabled: yes
   become: yes
 
 - name: open http/s in firewall
   firewalld:
-    port: {{ item }}
+    port: "{{ item }}"
     state: enabled
     permanent: yes
     immediate: yes

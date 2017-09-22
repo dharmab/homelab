@@ -1,0 +1,11 @@
+# Insecure credentials for lab environment only!
+graylog_root_password: admin
+graylog_password_secret_seed: graylog
+nginx_virtual_hosts:
+  - type: proxy
+    names:
+      - graylog.lab.dharmab.com
+    proxy_scheme: http
+    proxy_addresses:
+      - localhost:9000
+    is_default: True

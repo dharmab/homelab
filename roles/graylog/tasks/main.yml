@@ -45,7 +45,16 @@
   notify:
     - restart elasticsearch
 
-# TODO configure graylog password
+- name: configure graylog
+  template:
+    src: server.conf
+    dest: /etc/graylog/server/server.conf
+    owner: root
+    group: root
+    mode: 644
+  become: yes
+  notify:
+    - restart graylog
 
 - name: start graylog and related services
   systemd:
@@ -55,6 +64,7 @@
     - mongod
     - elasticsearch
     - graylog-server
+  become: yes
 
 - name: open graylog firewall port
   firewalld:
@@ -62,5 +72,14 @@
     state: enabled
     permanent: yes
     immediate: yes
+  when: graylog_open_port
   become: yes
 
+- name: close graylog firewall port
+  firewalld:
+    port: 9000/tcp
+    state: disabled
+    permanent: yes
+    immediate: yes
+  when: not graylog_open_port
+  become: yes

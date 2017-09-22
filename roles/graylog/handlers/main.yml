@@ -5,3 +5,10 @@
     state: restarted
     daemon_reload: yes
   become: yes
+
+- name: restart graylog
+  systemd:
+    name: graylog
+    state: restarted
+    daemon_reload: yes
+  become: yes

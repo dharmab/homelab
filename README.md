@@ -3,6 +3,8 @@
 ```
 vagrant up
 vagrant ssh ansible
-cd /vagrant
-ansible-playbook site.yml
+# First run to bootstrap network services
+ansible-playbook /vagrant/site.yml
+# Second run to provision systems
+ansible-playbook /vagrant/site.yml
 ```
