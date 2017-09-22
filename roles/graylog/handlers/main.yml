@@ -8,7 +8,7 @@
 
 - name: restart graylog
   systemd:
-    name: graylog
+    name: graylog-server
     state: restarted
     daemon_reload: yes
   become: yes

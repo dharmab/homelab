@@ -17,6 +17,7 @@
     - openssh
     - ntp
     - system
+    - syslog
     - utilities
 - hosts: prometheus
   roles:

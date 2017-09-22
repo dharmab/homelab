@@ -40,7 +40,7 @@
     dest: /etc/elasticsearch/elasticsearch.yml
     owner: root
     group: elasticsearch
-    mode: 660
+    mode: 0660
   become: yes
   notify:
     - restart elasticsearch
@@ -51,7 +51,7 @@
     dest: /etc/graylog/server/server.conf
     owner: root
     group: root
-    mode: 644
+    mode: 0644
   become: yes
   notify:
     - restart graylog
@@ -82,4 +82,15 @@
     permanent: yes
     immediate: yes
   when: not graylog_open_port
+  become: yes
+
+- name: open IETF-syslog firewall ports
+  firewalld:
+    port: "{{ item }}"
+    state: enabled
+    permanent: yes
+    immediate: yes
+  with_items:
+    - 6514/udp
+    - 6514/tcp
   become: yes

@@ -5,3 +5,7 @@ network_domain: lab.dharmab.com
 ntp_servers:
   - ntp-1.lab.dharmab.com
   - ntp-2.lab.dharmab.com
+syslog_destinations:
+  - host: graylog.lab.dharmab.com
+    port: 6514
+    transport: tcp

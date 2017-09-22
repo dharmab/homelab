@@ -66,6 +66,9 @@ Vagrant.configure(2) do |config|
     prometheus.vm.hostname = "prometheus-1"
     prometheus.vm.network :private_network, ip: get_ip_address(12)
     prometheus.vm.network :forwarded_port, guest: 9090, host: 9090
+    prometheus.vm.provider "virtualbox" do |virtualbox|
+      virtualbox.memory = 4096
+    end
   end
   
   # Log Aggregation
@@ -74,7 +77,7 @@ Vagrant.configure(2) do |config|
     graylog.vm.network :private_network, ip: get_ip_address(13)
     graylog.vm.network :forwarded_port, guest: 80, host: 9000
     graylog.vm.provider "virtualbox" do |virtualbox|
-      virtualbox.memory = 2048
+      virtualbox.memory = 4096
     end
   end
 
