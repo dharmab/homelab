@@ -17,7 +17,7 @@
     dest: /etc/systemd/system/cadvisor.service
     owner: root
     group: root
-    mode: 644
+    mode: 0644
   become: yes
   notify: restart cadvisor
 

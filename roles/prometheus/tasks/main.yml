@@ -5,7 +5,7 @@
     dest: /etc/systemd/system/prometheus.service
     owner: root
     group: root
-    mode: 644
+    mode: 0644
   become: yes
   notify: restart prometheus
 
@@ -15,7 +15,7 @@
     state: directory
     owner: root
     group: root
-    mode: 755
+    mode: 0755
   become: yes
 
 - name: configure prometheus
@@ -24,7 +24,7 @@
     dest: /etc/prometheus/prometheus.yml
     owner: root
     group: root
-    mode: 644
+    mode: 0644
   become: yes
   notify: 
     - reload prometheus
