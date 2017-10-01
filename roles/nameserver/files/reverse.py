@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# coding=utf-8
 
 import os
 import sys
@@ -29,17 +30,15 @@ def get_origin_from_zone_file_name(zone_file):
 
 
 def main():
-    zone_files = sys.argv[1:]
+    zone_file = sys.argv[1]
     ptrs = {}
-    for zone_file in zone_files:
-        try:
-            origin = get_origin_from_zone_file_name(zone_file)
-            print(origin)
-            zone = dns.zone.from_file(zone_file, origin=origin)
-            for name, ttl, resource in zone.iterate_rdatas('A'):
-                ptrs[resource.address] = name
-        except (dns.zone.UnknownOrigin, dns.zone.BadZone) as e:
-            sys.stderr.write("Error reading zone file " + zone_file + ": " + str(e))
+    try:
+        origin = get_origin_from_zone_file_name(zone_file)
+        zone = dns.zone.from_file(zone_file, origin=origin)
+        for name, ttl, resource in zone.iterate_rdatas('A'):
+            ptrs[resource.address] = name
+    except (dns.zone.UnknownOrigin, dns.zone.BadZone) as e:
+        sys.stderr.write("Error reading zone file " + zone_file + ": " + str(e))
 
 
 if __name__ == '__main__':

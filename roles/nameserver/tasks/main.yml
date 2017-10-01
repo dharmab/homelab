@@ -10,6 +10,7 @@
   with_items:
     - python-dns
     - python-netaddr
+  become: yes
 
 - name: configure nameserver
   template:
@@ -33,6 +34,7 @@
   with_dict: "{{ nameserver_zones }}"
   when: item.value.type == "master"
   notify:
+    - generate reverse zones
     - restart nameserver
 
 - name: open DNS in firewall

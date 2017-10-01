@@ -1,6 +1,8 @@
 ---
 - name: generate reverse zones
-  script: reverse.py {% for zone, config in nameserver_zones if config.type == 'master' %}/var/named/{{ zone }}.zone {% endfor %}
+  script: reverse.py /var/named/{{ item.key }}.zone
+  with_dict: "{{ nameserver_zones }}"
+  when: item.value.type == 'master'
   become: yes
   become_user: named
 
