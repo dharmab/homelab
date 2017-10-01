@@ -88,15 +88,3 @@ nameserver_zones:
     - type: CNAME
       name: prometheus
       resource: prometheus-1
-    - type: A
-      name: graylog-1
-      resource: 10.10.10.13
-    - type: SRV
-      name: _node-exporter._tcp
-      resource: 1 1 9100 graylog-1
-    - type: SRV
-      name: _cadvisor._tcp
-      resource: 1 1 8080 graylog-1
-    - type: CNAME
-      name: graylog
-      resource: graylog-1

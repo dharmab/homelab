@@ -6,6 +6,6 @@ ntp_servers:
   - ntp-1.lab.dharmab.com
   - ntp-2.lab.dharmab.com
 syslog_destinations:
-  - host: graylog.lab.dharmab.com
-    port: 6514
-    transport: tcp
+  - host: "{{ lookup('env', 'SYSLOG_PAPERTRAIL_HOST') }}"
+    port: "{{ lookup('env', 'SYSLOG_PAPERTRAIL_PORT') }}"
+    transport: udp
