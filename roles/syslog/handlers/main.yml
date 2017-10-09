@@ -1,7 +1,0 @@
----
-- name: restart syslog-ng
-  systemd:
-    name: syslog-ng
-    state: restarted
-    daemon_reload: yes
-  become: yes

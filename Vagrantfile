@@ -1,73 +1,34 @@
 # -*- mode: ruby -*-
 # vim: set ft=ruby softtabstop=2 shiftwidth=2 expandtab :
 
-##
-# Compose a local IPv4 address
-# +subnet_id+ is the first three octets of the address as a string, (e.g.
-# '192.168.10', and the +interface_id+ is the fourth octet as a string or
-# integer (e.g. 25 or '25')
-# Returns the IPv4 address as a string.
-def get_ip_address(interface_id, subnet_id="10.10.10")
-  if subnet_id[-1, 1] != "."
-    subnet_id << "."
-  end
-
-  "#{subnet_id}#{interface_id}"
-end
-
 Vagrant.configure(2) do |config|
   config.vm.box = "dharmab/centos7"
 
-  # We use the default insecure keypair for Ansible authentication
-  config.ssh.insert_key = false
-
   config.vm.provider "virtualbox" do |virtualbox|
     # Save disk space by using linked clones
-    # The drawback is reduced disk I/O... but I have SSDs :D
     virtualbox.linked_clone = true
   end
 
-  # Gateway
-  config.vm.define "router-1" do |router|
-    router.vm.hostname = "router-1"
-    router.vm.network :private_network, ip: get_ip_address(2)
+  config.vm.define "server-1", primary: true do |server|
+    server.vm.hostname = "server-1"
+    server.vm.network :private_network, ip: "10.10.10.10"
+
+    # Provision as a Salt master
+    server.vm.provision :shell, path: "bootstrap.sh", "args": ["master"]
+    server.vm.synced_folder "salt", "/srv/salt"
+    server.vm.synced_folder "pillar", "/srv/pillar"
+
+    # Prometheus direct access at http://localhost:9090
+    server.vm.network :forwarded_port, guest: 9090, host: 9090
+    # Grafana direct access at http://localhost:3000
+    server.vm.network :forwarded_port, guest: 3000, host: 3000
   end
 
-  # DNS Master
-  config.vm.define "bind-1" do |dns|
-    dns.vm.hostname = "bind-1"
-    dns.vm.network :private_network, ip: get_ip_address(3)
-  end
+  config.vm.define "server-2" do |server|
+    server.vm.hostname = "server-2"
+    server.vm.network :private_network, ip: "10.10.10.11"
 
-  # DNS Slave
-  config.vm.define "bind-2" do |dns|
-    dns.vm.hostname = "bind-2"
-    dns.vm.network :private_network, ip: get_ip_address(4)
-  end
-
-  # NTP servers
-  config.vm.define "ntp-1" do |dns|
-    dns.vm.hostname = "ntp-1"
-    dns.vm.network :private_network, ip: get_ip_address(5)
-  end
-  config.vm.define "ntp-2" do |dns|
-    dns.vm.hostname = "ntp-2"
-    dns.vm.network :private_network, ip: get_ip_address(6)
-  end
-  
-  # Configuration Management
-  config.vm.define "ansible" do |ansible|
-    ansible.vm.network :private_network, ip: get_ip_address(10)
-    ansible.vm.provision :shell, path: "bootstrap.sh"
-  end
-  
-  # Prometheus
-  config.vm.define "prometheus-1" do |prometheus|
-    prometheus.vm.hostname = "prometheus-1"
-    prometheus.vm.network :private_network, ip: get_ip_address(12)
-    prometheus.vm.network :forwarded_port, guest: 9090, host: 9090
-    prometheus.vm.provider "virtualbox" do |virtualbox|
-      virtualbox.memory = 4096
-    end
+    # Provision as a Salt minion
+    server.vm.provision :shell, path: "bootstrap.sh", "args": ["minion"]
   end
 end

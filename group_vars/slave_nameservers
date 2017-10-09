@@ -1,7 +1,0 @@
-nameserver_forwarders:
-  - 10.10.10.3
-nameserver_zones:
-  'lab.dharmab.com':
-    type: slave
-    masters:
-      - 10.10.10.3

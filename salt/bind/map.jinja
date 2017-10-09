@@ -1,0 +1,6 @@
+{% set bind = salt['grains.filter_by']({
+    'default': {
+        'forwarders': [],
+        'zones': {}
+    },
+}, merge=salt['pillar.get']('bind'), base='default') %}

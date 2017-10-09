@@ -1,0 +1,20 @@
+{%- set image = 'prom/prometheus:v1.7.1' -%}
+[Unit]
+Description=Prometheus
+After=docker.service
+Requires=docker.service
+ 
+[Service]
+Restart=always
+ExecStartPre=-/usr/bin/docker stop prometheus
+ExecStartPre=-/usr/bin/docker rm prometheus
+ExecStartPre=/usr/bin/docker pull {{ image }}
+ExecStart=/usr/bin/docker run --rm \
+--name prometheus \
+-v /etc/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml \
+-p 9090:9090 \
+{{ image }} \
+-config.file /etc/prometheus/prometheus.yml
+ 
+[Install]
+WantedBy=multi-user.target

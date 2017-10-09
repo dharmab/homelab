@@ -1,7 +1,0 @@
----
-- name: restart nameserver
-  systemd:
-    name: named
-    state: restarted
-    daemon_reload: yes
-  become: yes

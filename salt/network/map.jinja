@@ -1,0 +1,9 @@
+{% set network = salt['grains.filter_by']({
+    'default': {
+        'resolvers': [
+            '8.8.8.8',
+            '8.8.4.4',
+        ],
+    },
+}, merge=salt['pillar.get']('network'), base='default') %}
+

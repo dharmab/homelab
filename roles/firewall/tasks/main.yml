@@ -1,7 +1,0 @@
----
-- name: Enable firewall
-  systemd:
-    name: firewalld
-    state: started
-    enabled: yes
-  become: yes

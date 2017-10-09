@@ -1,4 +1,0 @@
-# network_gateway intentionally set to None
-network_gateway:
-network_primary_nameserver: 8.8.8.8
-network_secondary_nameserver: 8.8.4.4

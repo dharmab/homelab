@@ -1,0 +1,43 @@
+# Explicitly disable Protocol 1 (Protocol 1 is broken)
+Protocol 2
+
+# Disable DSA host keys, prefer Ed25519 (DSA keys are weak)
+HostKey /etc/ssh/ssh_host_ed25519_key
+HostKey /etc/ssh/ssh_host_rsa_key
+HostKey /etc/ssh/ssh_host_ecdsa_key
+
+# Logging
+SyslogFacility AUTHPRIV
+
+# Disable remote root login (common attack vector)
+PermitRootLogin no
+
+# Disable password authentication (passwords are weaker than keys
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+KbdInteractiveAuthentication no
+
+# Explicitly enable key-based authentication
+PubkeyAuthentication yes
+
+# Only check .ssh/authorized_keys (default also checks .ssh_authorized_keys2)
+AuthorizedKeysFile .ssh/authorized_keys
+
+# Disable GSSAPI
+GSSAPIAuthentication no
+GSSAPICleanupCredentials yes
+
+# Accept locale-related environment variables
+AcceptEnv LANG LC_CTYPE LC_NUMERIC LC_TIME LC_COLLATE LC_MONETARY LC_MESSAGES
+AcceptEnv LC_PAPER LC_NAME LC_ADDRESS LC_TELEPHONE LC_MEASUREMENT
+AcceptEnv LC_IDENTIFICATION LC_ALL LANGUAGE
+AcceptEnv XMODIFIERS
+
+# Disable SSH tunneling (can be used to exfiltrate data)
+AllowTcpForwarding no
+
+# Disable X11 Forwarding (Unused feature)
+X11Forwarding no
+
+# Disable UseDNS (Causes slow connections when PTR records are not available)
+UseDNS no

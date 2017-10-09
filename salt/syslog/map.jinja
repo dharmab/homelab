@@ -1,0 +1,5 @@
+{% set syslog = salt['grains.filter_by']({
+    'default': {
+        'destinations': [],
+    },
+}, merge=salt['pillar.get']('syslog'), base='default') %}
