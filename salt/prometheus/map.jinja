@@ -1,5 +1,5 @@
 {% set prometheus = salt['grains.filter_by']({
     'default': {
-		'open_server_ports': False
+        'open_server_ports': False
     },
 }, merge=salt['pillar.get']('prometheus'), base='default') %}
