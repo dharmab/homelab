@@ -1,5 +1,1 @@
-*.swo
-*.swp
-.vagrant
-env.sh
-site.retry
+.vagrant/
