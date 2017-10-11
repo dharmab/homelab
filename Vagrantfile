@@ -7,6 +7,8 @@ Vagrant.configure(2) do |config|
   config.vm.provider "virtualbox" do |virtualbox|
     # Save disk space by using linked clones
     virtualbox.linked_clone = true
+    virtualbox.memory = 2048
+    virtualbox.cpus = 2
   end
 
   config.vm.define "server-1", primary: true do |server|
