@@ -37,25 +37,25 @@ grafana:
             avg: false
           targets:
           - format: time_series
-            expr: (node_cpu{instance=~"$node:.*", mode="system"})
+            expr: sum(node_cpu{instance=~"$node:.*", mode="system"})
             step: 2
             legendFormat: System
             intervalFactor: 2
             refId: A
           - format: time_series
-            expr: (node_cpu{instance=~"$node:.*", mode="user"})
+            expr: sum(node_cpu{instance=~"$node:.*", mode="user"})
             step: 2
             legendFormat: User
             intervalFactor: 2
             refId: B
           - format: time_series
-            expr: (node_cpu{instance=~"$node:.*", mode="iowait"})
+            expr: sum(node_cpu{instance=~"$node:.*", mode="iowait"})
             step: 2
             legendFormat: I/O Wait
             intervalFactor: 2
             refId: C
           - format: time_series
-            expr: (node_cpu{instance=~"$node:.*", mode="idle"})
+            expr: sum(node_cpu{instance=~"$node:.*", mode="idle"})
             step: 2
             legendFormat: Idle
             intervalFactor: 2
@@ -255,7 +255,7 @@ grafana:
         - 1h
         - 2h
         - 1d
-      version: 36
+      version: 37
       time:
         to: now
         from: now-15m
