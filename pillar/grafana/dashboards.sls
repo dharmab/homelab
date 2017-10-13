@@ -11,7 +11,7 @@ grafana:
         repeatRowId: None
         panels:
         - bars: false
-          timeFrom:
+          timeFrom: ''
           links: []
           thresholds: []
           spaceLength: 10
@@ -97,14 +97,14 @@ grafana:
           repeat: cpu
           dashLength: 10
           stack: true
-          timeShift:
+          timeShift: ''
           aliasColors: {}
           lines: true
           points: false
           datasource: Prometheus
           pointradius: 5
         - bars: false
-          timeFrom:
+          timeFrom: None
           links: []
           thresholds: []
           spaceLength: 10
@@ -190,7 +190,7 @@ grafana:
             values: true
             alignAsTable: false
             avg: false
-          timeShift:
+          timeShift: None
           aliasColors:
             Unavailable Memory: '#7EB26D'
             Available Memory: '#7EB26D'
@@ -201,28 +201,7 @@ grafana:
           decimals: 2
         showTitle: false
         collapse: false
-      templating:
-        list:
-        - regex: (.*):.*
-          sort: 1
-          multi: false
-          hide: 1
-          name: node
-          tags: []
-          allValue: None
-          tagValuesQuery: ''
-          refresh: 1
-          label: None
-          current:
-            text: server01.lab.dharmab.com
-            value: server01.lab.dharmab.com
-          datasource: Prometheus
-          type: query
-          query: label_values(node_boot_time, instance)
-          useTags: false
-          tagsQuery: ''
-          options: []
-          includeAll: false
+      editMode: false
       links: []
       tags: []
       graphTooltip: 0
@@ -230,8 +209,7 @@ grafana:
       title: system-performance
       editable: true
       refresh: false
-      annotations:
-        list: []
+      id: 3
       gnetId: None
       timepicker:
         time_options:
@@ -255,12 +233,35 @@ grafana:
         - 1h
         - 2h
         - 1d
-      version: 33
+      version: 35
       time:
         to: now
         from: now-15m
       timezone: browser
       schemaVersion: 14
-      id: 3
+      annotations:
+        list: []
+      templating:
+        list:
+        - regex: (.*):.*
+          sort: 1
+          multi: false
+          hide: 1
+          name: node
+          tags: []
+          allValue: None
+          tagValuesQuery: ''
+          refresh: 1
+          label: None
+          current:
+            text: server01.lab.dharmab.com
+            value: server01.lab.dharmab.com
+          datasource: Prometheus
+          type: query
+          query: label_values(node_boot_time, instance)
+          useTags: false
+          tagsQuery: ''
+          options: []
+          includeAll: false
     slug: system-performance
 

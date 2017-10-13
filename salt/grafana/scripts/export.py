@@ -19,6 +19,13 @@ def main():
     exported_dashboards = []
     for meta in current_dashboards:
         dashboard = get_dashboard(session, baseurl, meta['uri'])
+        # When time range keys are not set, the grafana4_dashboard Salt module
+        # incorrectly imports them as the string 'None'
+        for row in dashboard['dashboard']['rows']:
+            for panel in row['panels']:
+                for key in ['timeShift', 'timeFrom']:
+                    if not panel[key]:
+                        panel[key] = ''
         exported_dashboards.append(
             {
                 'slug': dashboard['meta']['slug'],
