@@ -38,7 +38,6 @@ grafana:
     - require:
       - service: grafana
 
-# TODO create datasources and dashboards via Salt
 {% for datasource in grafana.datasources %}
 grafana_datasource_{{ loop.index }}:
   grafana4_datasource.present:
@@ -49,6 +48,13 @@ grafana_datasource_{{ loop.index }}:
     - require:
       - service: grafana
       - grafana4_org: grafana
+{% endfor %}
+
+{% for dashboard in grafana.dashboards %}
+grafana_dashboard_{{ loop.index }}:
+  grafana4_dashboard.present:
+    - name: {{ dashboard.slug }}
+    - dashboard: {{ dashboard.content }}
 {% endfor %}
 
 grafana_firewalld:

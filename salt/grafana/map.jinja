@@ -1,6 +1,7 @@
 {% set grafana = salt['grains.filter_by']({
     'default': {
-        'open_port': False,
+		'dashboards': [],
         'datasources': [],
+        'open_port': False
     },
 }, merge=salt['pillar.get']('grafana'), base='default') %}

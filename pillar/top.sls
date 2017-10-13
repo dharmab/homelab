@@ -7,5 +7,6 @@ base:
     - bind.master
     - prometheus.server
     - grafana
+    - grafana.dashboards
   'server-2':
     - bind.slave
