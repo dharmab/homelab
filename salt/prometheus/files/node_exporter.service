@@ -12,13 +12,14 @@ ExecStartPre=/usr/bin/docker pull {{ image }}
 ExecStart=/usr/bin/docker run --rm \
 --name node-exporter \
 -p 9100:9100 \
--v "/proc:/host/proc:ro" \
--v "/sys:/host/sys:ro" \
--v "/:/rootfs:ro" \
+-v /proc:/host/proc:ro \
+-v /sys:/host/sys:ro \
+-v /:/rootfs:ro \
+--network=host \
 {{ image }} \
 --collector.procfs /host/proc \
 --collector.sysfs /host/sys \
---collector.filesystem.ignored-mount-points "^/(sys|proc|dev|host|etc)($|/)"
+--collector.filesystem.ignored-mount-points ^/(sys|proc|dev|host|etc)($|/)
  
 [Install]
 WantedBy=multi-user.target
