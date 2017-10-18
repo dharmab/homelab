@@ -1,6 +1,9 @@
 prometheus:
   open_server_ports: True
   server_config:
+    global:
+      scrape_interval: 10s
+      scrape_timeout: 3s
     scrape_configs:
       - job_name: node_exporter
         dns_sd_configs:
