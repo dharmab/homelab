@@ -3,12 +3,12 @@ grafana:
   - content:
       style: dark
       rows:
-      - repeat: None
+      - repeat: ''
         titleSize: h2
-        repeatIteration: None
+        repeatIteration: ''
         title: Row title
         height: 478
-        repeatRowId: None
+        repeatRowId: ''
         panels:
         - bars: false
           timeFrom: ''
@@ -68,19 +68,19 @@ grafana:
             format: short
             label: ''
             show: true
-            decimals: None
+            decimals: ''
           - logBase: 1
             show: false
-            max: None
+            max: ''
             format: short
-            min: None
+            min: ''
             label: ''
           xaxis:
-            buckets: None
+            buckets: ''
             show: true
             values: []
             mode: time
-            name: None
+            name: ''
           seriesOverrides:
           - alias: Idle
             lines: false
@@ -149,19 +149,19 @@ grafana:
             format: bytes
             label: ''
             show: true
-            decimals: None
+            decimals: ''
           - logBase: 1
             show: false
-            max: None
+            max: ''
             format: short
-            min: None
-            label: None
+            min: ''
+            label: ''
           xaxis:
-            buckets: None
+            buckets: ''
             show: false
             values: []
             mode: time
-            name: None
+            name: ''
           seriesOverrides:
           - alias: Free
             lines: false
@@ -182,13 +182,13 @@ grafana:
           legend:
             rightSide: false
             total: false
-            sideWidth: None
+            sideWidth: ''
             min: false
             max: false
             show: true
             current: true
             values: true
-            alignAsTable: false
+            alignAsTable: true
             avg: false
           timeShift: ''
           aliasColors:
@@ -201,12 +201,12 @@ grafana:
           decimals: 2
         showTitle: false
         collapse: false
-      - repeat:
+      - repeat: ''
         titleSize: h6
-        repeatIteration:
+        repeatIteration: ''
         title: Dashboard Row
         height: 250
-        repeatRowId:
+        repeatRowId: ''
         panels:
         - bars: false
           timeFrom: ''
@@ -254,7 +254,7 @@ grafana:
             min: '0'
             max:
             format: Bps
-            label:
+            label: ''
             show: true
             decimals:
           - logBase: 1
@@ -262,13 +262,13 @@ grafana:
             max:
             format: short
             min:
-            label:
+            label: ''
           xaxis:
-            buckets:
+            buckets: ''
             show: true
             values: []
             mode: time
-            name:
+            name: ''
           seriesOverrides:
           - color: '#0A50A1'
             alias: Transmit
@@ -289,6 +289,103 @@ grafana:
           decimals: 2
         showTitle: false
         collapse: false
+      - repeat: ''
+        titleSize: h6
+        repeatIteration: ''
+        title: Dashboard Row
+        height: 170
+        repeatRowId: ''
+        panels:
+        - sort:
+            col: 0
+            desc: true
+          styles:
+          - alias: Time
+            type: hidden
+            link: false
+            pattern: Time
+            dateFormat: YYYY-MM-DD HH:mm:ss
+          - type: number
+            dateFormat: YYYY-MM-DD HH:mm:ss
+            pattern: Value
+            thresholds:
+            - '75'
+            - '90'
+            alias: Utilization
+            colors:
+            - rgba(0, 0, 0, 0)
+            - rgba(175, 225, 25, 0.89)
+            - rgba(172, 45, 45, 0.97)
+            colorMode: cell
+            decimals: 2
+            unit: percentunit
+          timeFrom: 0s
+          span: 12
+          pageSize: ''
+          links: []
+          title: Disk Usage
+          timeShift: ''
+          yaxes: ''
+          transform: table
+          showHeader: true
+          scroll: true
+          targets:
+          - intervalFactor: 2
+            expr: label_replace(sort(1 - (node_filesystem_free{instance=~"$node:.*",
+              mountpoint=~"/rootfs/.*", fstype!~"(tmpfs|vboxsf)"} / node_filesystem_size)
+              > 0), "mountpoint", "$1", "mountpoint", "/rootfs(.*)")
+            step: 2
+            refId: A
+            format: table
+          hideTimeOverride: false
+          fontSize: 100%
+          datasource: Prometheus
+          xaxis: ''
+          type: table
+          id: 4
+          columns: []
+        showTitle: false
+        collapse: false
+      editMode: false
+      links: []
+      tags: []
+      graphTooltip: 0
+      hideControls: false
+      title: system-performance
+      editable: true
+      refresh: 5s
+      id: 3
+      gnetId:
+      timepicker:
+        time_options:
+        - 5m
+        - 15m
+        - 1h
+        - 6h
+        - 12h
+        - 24h
+        - 2d
+        - 7d
+        - 30d
+        refresh_intervals:
+        - 5s
+        - 10s
+        - 30s
+        - 1m
+        - 5m
+        - 15m
+        - 30m
+        - 1h
+        - 2h
+        - 1d
+      version: 46
+      time:
+        to: now
+        from: now-15m
+      timezone: browser
+      schemaVersion: 14
+      annotations:
+        list: []
       templating:
         list:
         - regex: (.*):.*
@@ -297,14 +394,14 @@ grafana:
           hide: 1
           name: node
           tags: []
-          allValue: None
+          allValue: ''
           tagValuesQuery: ''
           refresh: 1
-          label: None
+          label: ''
           current:
-            text: server01.lab.dharmab.com
-            value: server01.lab.dharmab.com
-            tags: []
+            text: server02.lab.dharmab.com
+            selected: false
+            value: server02.lab.dharmab.com
           datasource: Prometheus
           type: query
           query: label_values(node_boot_time, instance)
@@ -373,44 +470,5 @@ grafana:
           - text: 30d
             selected: false
             value: 30d
-      links: []
-      tags: []
-      graphTooltip: 0
-      hideControls: false
-      title: system-performance
-      editable: true
-      refresh: 5s
-      annotations:
-        list: []
-      gnetId: None
-      timepicker:
-        time_options:
-        - 5m
-        - 15m
-        - 1h
-        - 6h
-        - 12h
-        - 24h
-        - 2d
-        - 7d
-        - 30d
-        refresh_intervals:
-        - 5s
-        - 10s
-        - 30s
-        - 1m
-        - 5m
-        - 15m
-        - 30m
-        - 1h
-        - 2h
-        - 1d
-      version: 41
-      time:
-        to: now
-        from: now-5m
-      timezone: browser
-      schemaVersion: 14
-      id: 3
     slug: system-performance
 

@@ -24,7 +24,7 @@ def main():
         for row in dashboard['dashboard']['rows']:
             for panel in row['panels']:
                 for key in ['timeShift', 'timeFrom']:
-                    if not panel[key]:
+                    if not panel.get(key, None):
                         panel[key] = ''
         exported_dashboards.append(
             {
